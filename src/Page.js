@@ -1,16 +1,18 @@
 import React from 'react';
 import SearchBar from './components/SearchBar';
-import Poster from './components/Poster';
+import Sidebar from './components/Sidebar'
 import Axios from 'axios';
 import styled from 'styled-components'
 import { API_ROOT } from './constants';
+import Overview from './components/Overview'
 
-const Wrapper = styled.section`
+const Wrapper = styled.div`
   width: 100vw;
   height: 100%;
-  background-color: black;
 `
-
+const InternalWrapper = styled.section`
+  display: flex;
+`
 const Masthead = styled.div`
   width: 100vw;
   height: 350px;
@@ -63,9 +65,11 @@ export default class Page extends React.Component {
     } else {
       return (
         <Wrapper>
-          <Masthead backDrop={`https://image.tmdb.org/t/p/w1400_and_h450_face${this.state.show.backdrop_path}`}>
-  
-          </Masthead>
+          <Masthead backDrop={`https://image.tmdb.org/t/p/w1400_and_h450_face${this.state.show.backdrop_path}`}/>
+          <InternalWrapper>
+            <Overview show={this.state.show}/>
+            <Sidebar show={this.state.show}/>
+          </InternalWrapper>
         </Wrapper>
       )
     }
