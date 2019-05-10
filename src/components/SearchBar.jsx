@@ -2,6 +2,7 @@ import React from 'react'
 import Autosuggest from 'react-autosuggest';
 import PropTypes from 'prop-types';
 import Cable from 'actioncable';
+import Link from 'react-router-dom'
 
 export default class SearchBar extends React.Component {
   static propTypes = {
@@ -95,9 +96,9 @@ export default class SearchBar extends React.Component {
     this.renderSuggestion = suggestion => {
       console.log("renderSuggestion: ", suggestion)
       return (
-        <div>
+        <a href={`/${suggestion.Title.split(" ").join("-")}`}>
           {suggestion.Title}
-        </div>
+        </a>
       )
     };
   }

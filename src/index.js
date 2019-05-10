@@ -71,6 +71,26 @@ const GlobalStyle = createGlobalStyle`
     display: none;
   }
 
+  .react-autosuggest__container, .react-autosuggest__input, .react-autosuggest__suggestions-container {
+    width: 100vw;
+    margin: 0 0 10px 0;
+  }
+
+  .react-autosuggest__input {
+    height: 50px;
+  }
+  
+  .react-autosuggest__suggestions-list {
+    list-style-type: none;
+  }
+
+  .react-autosuggest__suggestion {
+
+  } 
+  
+  .react-autosuggest__suggestion--first {
+
+  }
 `
 
 const routes = (
