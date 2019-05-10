@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
 import ModalVideo from 'react-modal-video'
 import Axios from 'axios';
+import styled from 'styled-components'
 
+const Button = styled.button`
+  border-color: black;
+  color: white;
+  background: black;
+`
 
 export default class Trailer extends Component {
   constructor () {
     super()
     this.state = {
-      isOpen: false
+      loading: true,
+      isOpen: false,
+      youTubeKey: null
     }
     this.openModal = () => {
       this.setState({isOpen: true})
@@ -17,7 +25,7 @@ export default class Trailer extends Component {
   componentDidMount(){
     Axios.get(`https://api.themoviedb.org/3/tv/${this.props.showID}/videos?api_key=${process.env.REACT_APP_TMDB_API_KEY}`).then(response => {
       this.setState({
-        show: response.data
+        youTubeKey: response.data.results[0].key
       })
       console.log(response.data)
     })
@@ -26,14 +34,14 @@ export default class Trailer extends Component {
 
 
   render () {
-    console.log(this.props)
+    console.log(this.props, this.state)
     if (this.props.showID === null) {
       return <></>
     } else {
       return (
         <div>
-          <ModalVideo channel='youtube' isOpen={this.state.isOpen} videoId='L61p2uyiMSo' onClose={() => this.setState({isOpen: false})} />
-          <button onClick={this.openModal}>Open</button>
+          <ModalVideo channel='youtube' isOpen={this.state.isOpen} videoId={this.state.youTubeKey} onClose={() => this.setState({isOpen: false})} />
+          <Button onClick={this.openModal}>► View Trailer</Button>
         </div>
       )
     }

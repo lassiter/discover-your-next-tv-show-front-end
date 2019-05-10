@@ -10,7 +10,67 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0px;
+    overflow-x: hidden;
   }
+
+  .loader:empty {
+    position: absolute;
+    top: calc(50% - 4em);
+    left: calc(50% - 4em);
+    width: 6em;
+    height: 6em;
+    border: 1.1em solid rgba(0, 0, 0, 0.2);
+    border-left: 1.1em solid #000000;
+    border-radius: 50%;
+    animation: load8 1.1s infinite linear;
+  }
+  
+  @keyframes load8 {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .modal-video {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .modal-video-body {
+    height: 100vw;
+    width: 100vw;
+    margin: auto;
+    display: block;
+    position: fixed;
+    z-index: 1000;
+    background: rgba(255,255,255, .75);
+  }
+
+  .modal-video-inner {
+    margin: auto;
+    display: block;
+    position: relative;
+    width: 50vw;
+    height: 20%;
+    top: 130px;
+  }
+
+  .modal-video-movie-wrap {
+    padding-bottom: 56.25%;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .modal-video-close-btn {
+    display: none;
+  }
+
 `
 
 const routes = (
