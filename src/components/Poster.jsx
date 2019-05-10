@@ -8,6 +8,7 @@ const InternalPoster = styled(Link)`
   min-width: 150px;
   min-height: 450px;
   width: min-content;
+  margin: auto;
 `
 
 // max-width: 300px;
