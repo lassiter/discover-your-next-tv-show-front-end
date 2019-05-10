@@ -1,18 +1,36 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
+
+const Header = styled.h1`
+  color: white;
+  display: inline-flex;
+`
+const SubHeader = styled.h3`
+  color: white;
+  display: inline-flex;
+`
+const Span = styled.span`
+
+`
+const StartDate = styled.h3`
+  color: darkgray;
+  display: inline-flex;
+  margin-left: 15px;
+`
 
 export default class Title extends Component {
   render() {
     if (this.props.name === this.props.originalName) {
       return (
         <>
-          <h1>{this.props.name}</h1>
+          <Span><Header>{this.props.originalName}</Header><StartDate>({this.props.firstAirDate.slice(0,4)})</StartDate></Span>
         </>
       )
     } else {
       return (
         <>
-          <h1>{this.props.originalName}</h1>
-          <h3>{this.props.name}</h3>
+          <Span><Header>{this.props.originalName}</Header><StartDate>({this.props.firstAirDate.slice(0,4)})</StartDate></Span>
+          <SubHeader>{this.props.name}</SubHeader>
         </>
       )
     }

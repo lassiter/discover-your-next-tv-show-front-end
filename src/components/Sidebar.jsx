@@ -11,6 +11,7 @@ const Wrapper = styled.aside`
 const ImageList = styled.ul`
   display: flex;
   flex-flow: row;
+  flex-wrap: wrap
   list-style-type: none;
   margin-block-start: 1em;
   margin-block-end: 1em;
@@ -18,9 +19,13 @@ const ImageList = styled.ul`
   margin-inline-end: 0px;
   padding-inline-start: 0px;
 
-  li {
+  li:not(:first-child) {
     width: min-content;
-    margin-left: 15px;
+    margin: 0 0 15px 15px;
+  }
+  li:first-child {
+    width: min-content;
+    margin: 0 0 15px 0;
   }
 `
 

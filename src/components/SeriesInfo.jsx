@@ -34,8 +34,8 @@ const StyledPanel = styled(ExpansionPanel)`
 export default class SeriesInfo extends Component {
   render() {
     console.log(this.props)
-    const seasons = this.props.show.seasons.map((season, index) => {
-      return <Season season={season}/>
+    const seasons = this.props.show.seasons.filter(season => season.name !== "Specials").map((season, index) => {
+      return <Season key={index} season={season}/>
     })
     return (
       <div>

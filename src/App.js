@@ -16,6 +16,7 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
+      loading: true,
       hasMore: true,
       rateData: {
         remainingRequests: null,
@@ -29,7 +30,7 @@ export default class App extends React.Component {
       }
     }
     this.getTVShows = (page = 1) => {
-      Axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=${page}`)
+      let request = Axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=${page}`)
         .then(response => {
           console.log(response)
           let rateData = {
@@ -47,6 +48,7 @@ export default class App extends React.Component {
             popularTVShows: popularTVShows
           })
         })
+      return request
     }
 
     this.fetchMoreData = () => {
@@ -68,10 +70,17 @@ export default class App extends React.Component {
   componentDidMount() {
     console.log(process.env.REACT_APP_TMDB_API_KEY)
     this.getTVShows()
+      .then(() => {
+        this.setState({
+          loading: false
+        })
+      })
   };
   render() {
     console.log(this.state)
-
+    if (this.state.loading) {
+      return null
+    }
     return (
       <div className="App">
         <SearchBar/>

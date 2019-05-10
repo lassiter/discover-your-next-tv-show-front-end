@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar'
 import Axios from 'axios';
 import styled from 'styled-components'
 import { API_ROOT } from './constants';
+import Article from './components/Article'
 import Overview from './components/Overview'
 
 const Wrapper = styled.div`
@@ -15,64 +16,78 @@ const InternalWrapper = styled.section`
 `
 const Masthead = styled.div`
   width: 100vw;
-  height: 350px;
-  background: url(${props => props.backDrop}) no-repeat center center fixed;
-  background-size: cover;
-  overflow: hidden;
+  height: 450px;
 
+  
   &:before {
     content: '';
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
-    width: 100vw;
-    height: 350px;
-    background: linear-gradient(0deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,1) 100%);
+    right: 0;
+    width: 100%;
+    height: 450px;
+    z-index: -1;
+    display: block;
+    background-image: radial-gradient(circle at 20% 50%, rgba(22.35%, 23.92%, 24.31%, 0.98) 0%, rgba(1.96%, 5.49%, 9.02%, 0.88) 100%), url(${props => props.backDrop});
+    background-repeat: no-repeat;
+    background-size: 100vw 450px;
+    filter: opacity(1) grayscale(100%) contrast(130%);
   }
 `
+const InternalMasthead = styled.div`
+  background: transparent;
+  width: 70vw;
+  margin: 0 auto;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  z-index: 0;
+`
+
 
 export default class Page extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      show: null
+      show: null,
+      loading: true
     }
   }
 
   componentDidMount(){
     const { slug } = this.props.match.params
     console.log('mounted page', slug, this.props.location.state)
-    if (this.props.location.state === undefined) {
       Axios.get(`${API_ROOT}/search?q=${slug}&by=slug&class=TvShow`).then(response => {
+        console.log(this.state)
         this.setState({
           show: response.data
         })
-        console.log(response.data)
+      }).then(()=>{
+        console.log(this.state)
+        this.setState({
+          loading: false
+        })
       })
-    } else {
-      this.setState({
-        show: this.props.location.state.show
-      })
-    }
   }
 
   render() {
-    if (this.state.show === null) {
-      return <></>
-    } else {
+    console.log(this.state)
+    if (this.state.loading) {
+      return null
+    }
       return (
-        <Wrapper>
-          <Masthead backDrop={`https://image.tmdb.org/t/p/w1400_and_h450_face${this.state.show.backdrop_path}`}/>
+        <Wrapper className={"loader"}>
+          <Masthead backDrop={`https://image.tmdb.org/t/p/w1400_and_h450_face${this.state.show.backdrop_path}`}>
+            <InternalMasthead>
+              <Overview show={this.state.show}/>
+            </InternalMasthead>
+          </Masthead>
           <InternalWrapper>
-            <Overview show={this.state.show}/>
+            <Article show={this.state.show}/>
             <Sidebar show={this.state.show}/>
           </InternalWrapper>
         </Wrapper>
       )
-    }
   }
 }
 
