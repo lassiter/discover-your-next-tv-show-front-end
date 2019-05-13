@@ -1,70 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How to Run This Project
+This project is a multi-repo project with a separate front-end and backend.
 
-redis-server /usr/local/etc/redis.conf
+You need Postgres, Redis, Ruby, Rails, React, and Javascript on your machine to run this application locally.
 
-## Available Scripts
+For instructions on how to install Redis on your OS/machine, you can view the docs [here]().
 
-In the project directory, you can run:
+### Steps
 
-### `npm start`
+1. Get a TMDB API Key https://www.themoviedb.org/settings/api
+2. Start Postgres, view docs here: https://www.postgresql.org/docs/9.1/server-start.html
+3. Start Redis, via terminal `redis-server /usr/local/etc/redis.conf`
+4. Install the Backend
+   1. `git clone ...`
+   2. CD into the directory where you cloned the repo.
+   3. Change `../config/local_env.example.yml` to `../config/local_env.yml` and insert your TMDB API key to replace "foobar".
+   4. Install the dependencies by running `bundle install`
+   5. Start the server `rails s`
+5. Install the Front-end
+   1. `git clone ...`
+   2. CD into the directory where you cloned the repo.
+   3. In the root directory, create a file called `.env.local` and insert `REACT_APP_TMDB_API_KEY=yourapikeyhere` and replace "yourapikeyhere" with your TMDB API key.
+   4. Install the dependencies by running `npm install`
+   5. Start the server `npm start`
+6. Visit http://localhost:3000 and you should see movie posters.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Problem and Solution
+### Problem
+We want to see what the popular movies are and be able to learn a bit about them.
+### Solution
+We'll create a dashboard that shows us the latest movies via the The Movie DB API.
 
-### `npm test`
+### Choices
+There are a lot of different ways you could approach this but I decided to use a client-side full-stack react application to solve this problem. I also used a Rails backend as a microservice to handle search using WebSockets and Redis (ActiveCable).
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+For the react app, I structured three pages, the main App component that lists search and posters as links to Page component using dynamic page generation via routing. If you visit localhost:3000/Game-Of-Thrones a request is made to the rails server to find the [exported record](https://developers.themoviedb.org/3/getting-started/daily-file-exports) and return the object with a title, popularity, and id. The front end takes that data and sends it off to TMDB for more data which is used to render the page. The initial search comes from parsing the /:slug of "Game-Of-Thrones" to "Game Of Thrones".
 
-### `npm run build`
+For the backend, there are two main routes /search and /cable. /search handles all routing regarding the /:slug searches as individual pages. It returns 404 if not found, which then causes a redirect to the 404/NotFound component on the front-end. /cable handles the instant search and passes data back and forth with recommendations.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+There is also a rake task which downloads the [daily exported TV Show records](https://developers.themoviedb.org/3/getting-started/daily-file-exports) and inputs them in the Postgres Database. There is also a SearchSuggestion model which has a seed method that is used to seed the Redis database. The key reason for keeping both on hand is speed for page initialization and instant search.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Styling is done via StyledComponents.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+I think if I were to do this again, I would stick with the react front-end I have and micro-service but use a framework lighter than rails. If cost wasn't an issue, I'd offload the instant search to Algolia. However, with 80,000 records in Postgres and 750,000 keys in the Redis cache at 25mb.
