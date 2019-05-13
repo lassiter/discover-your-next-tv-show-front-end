@@ -89,7 +89,7 @@ export default class SearchBar extends React.Component {
     // Use your imagination to render suggestions.
     this.renderSuggestion = suggestion => {
       return (
-        <a href={`/${suggestion.Title.split(" ").join("-")}`}>
+        <a href={`/${suggestion.Title.split(" ").join("_")}`}>
           {suggestion.Title}
         </a>
       )
