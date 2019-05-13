@@ -11,17 +11,6 @@ const InternalPoster = styled(Link)`
   margin: auto;
 `
 
-// max-width: 300px;
-// min-height: 300px;
-// background-image: 
-//   linear-gradient(
-//     rgba(0, 0, 0, 0),
-//     rgba(0, 0, 0, 0.5)
-//     100%
-//   ),
-//   url(${props => props.posterImg});
-// background-size: 150px auto;
-// background-repeat: no-repeat;
 const PosterImage = styled.img`
   max-width: 300px;
   min-width: 150px;
