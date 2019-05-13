@@ -42,4 +42,6 @@ There is also a rake task which downloads the [daily exported TV Show records](h
 
 Styling is done via StyledComponents.
 
-I think if I were to do this again, I would stick with the react front-end I have and micro-service but use a framework lighter than rails. If cost wasn't an issue, I'd offload the instant search to Algolia. However, with 80,000 records in Postgres and 750,000 keys in the Redis cache at 25mb.
+I think if I were to do this again, I would stick with the react front-end I have and micro-service but use a framework lighter than rails. If cost wasn't an issue, I'd offload the instant search to Algolia. However, with 80,000 records in Postgres and 750,000 keys in the Redis cache at 900mb. I'd also figure out a better way to handle the parsing when people visit a URL. One issue that I ran out of time with was figuring out the best way to handle multi-lingual url paths since the display language is always in english the the records are sorted by original name. So for example, if you visit "/One-Punch_Man" you'll get a 404 because the slug would need to be the original title of "ワンパンマン". That's tricky when you're working off an export record which looks like this: `#<TvShow id: 63926, title: "ワンパンマン", popularity: 0.337561e3, created_at: "2019-05-12 05:09:46", updated_at: "2019-05-12 05:09:46">`
+
+Overall, I think my approach was solid. There are points that were good and many that can improve in quick project like this.
