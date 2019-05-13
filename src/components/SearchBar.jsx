@@ -32,7 +32,6 @@ export default class SearchBar extends React.Component {
     // Autosuggest will call this function every time you need to update suggestions.
     // You already implemented this logic above, so just use it.
     this.onSuggestionsFetchRequested = ({ value }) => {
-      console.log(value, this.state.cabledSuggestions)
       this.setState({
         suggestions: this.getSuggestions(value, this.state.cabledSuggestions)
       });
@@ -53,7 +52,6 @@ export default class SearchBar extends React.Component {
         connected: () => {},
         received: (data) => {
           let parsedData = data["suggestions"].map(obj => obj = JSON.parse(obj)).sort((a,b)=>{return b.Popularity - a.Popularity})
-          console.log(parsedData)
           this.setState({ cabledSuggestions: parsedData });
         },
         search: function(searchValue) {
@@ -64,7 +62,6 @@ export default class SearchBar extends React.Component {
       });
     }
     this.onChange = (event, { newValue, method }) => {
-      console.log(newValue)
       this.setState({
         value: newValue
       });
@@ -75,7 +72,6 @@ export default class SearchBar extends React.Component {
     this.getSuggestions = (value, cabledSuggestions) => {
       const inputValue = value.trim().toLowerCase();
       const inputLength = inputValue.length;
-      console.log(cabledSuggestions)
       cabledSuggestions.sort(function(a,b){
         return b.Popularity - a.Popularity
       })
@@ -88,13 +84,11 @@ export default class SearchBar extends React.Component {
     // based on the clicked suggestion. Teach Autosuggest how to calculate the
     // input value for every given suggestion.
     this.getSuggestionValue = suggestion => {
-      console.log("getSuggestion: ", suggestion)
       return suggestion.Title
     };
 
     // Use your imagination to render suggestions.
     this.renderSuggestion = suggestion => {
-      console.log("renderSuggestion: ", suggestion)
       return (
         <a href={`/${suggestion.Title.split(" ").join("-")}`}>
           {suggestion.Title}

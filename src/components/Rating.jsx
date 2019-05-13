@@ -32,7 +32,6 @@ const InternalWrapper = styled.div`
 
 export default class Rating extends Component {
   render() {
-    console.log(this.props)
     return (
       <Wrapper>
         <Rate>{this.props.rating}</Rate>

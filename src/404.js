@@ -56,7 +56,6 @@ export default class NotFound extends React.Component {
     this.getTVShows = (page = 1) => {
       let request = Axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=${page}`)
         .then(response => {
-          console.log(response)
           let rateData = {
             remainingRequests: parseInt(response.headers["x-ratelimit-remaining"]),
             currentLimit: parseInt(response.headers["x-ratelimit-limit"]),
@@ -92,7 +91,6 @@ export default class NotFound extends React.Component {
     }
   }
   componentDidMount() {
-    console.log(process.env.REACT_APP_TMDB_API_KEY)
     this.getTVShows()
       .then(() => {
         this.setState({
@@ -101,7 +99,6 @@ export default class NotFound extends React.Component {
       })
   };
   render() {
-    console.log(this.state)
     if (this.state.loading) {
       return null
     }

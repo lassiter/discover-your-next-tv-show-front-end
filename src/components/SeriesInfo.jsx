@@ -33,7 +33,6 @@ const StyledPanel = styled(ExpansionPanel)`
 
 export default class SeriesInfo extends Component {
   render() {
-    console.log(this.props)
     const seasons = this.props.show.seasons.filter(season => season.name !== "Specials").map((season, index) => {
       return <Season key={index} season={season}/>
     })
@@ -53,7 +52,6 @@ class Season extends Component {
     } else {
       overview = <></>
     }
-    console.log(this.props)
     const posterImage = this.props.season.poster_path === null ? <></> : <PosterImage src={`https://image.tmdb.org/t/p/w500${this.props.season.poster_path}`}/>
     return (
       <StyledPanel>

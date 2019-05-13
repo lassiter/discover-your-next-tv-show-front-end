@@ -30,14 +30,12 @@ export default class Trailer extends Component {
           youTubeKey: response.data.results[0].key
         })
       }
-      console.log(response.data)
     })
   }
 
 
 
   render () {
-    console.log(this.props, this.state)
     if (isNotNullOrUndefined(this.props.showID) || isNotNullOrUndefined(this.state.youTubeKey)) {
       return <></>
     } else {

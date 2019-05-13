@@ -69,7 +69,6 @@ export default class Page extends React.Component {
           })
         }
       }).then(()=>{
-        console.log(this.state)
         this.setState({
           loading: false
         })
@@ -77,7 +76,6 @@ export default class Page extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     if (this.state.status === 404) {
       return <Redirect to='/404' />
     }

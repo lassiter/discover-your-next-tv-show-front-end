@@ -44,7 +44,6 @@ const PosterImage = styled.img`
 `
 export default class Overview extends Component {
   render() {
-    console.log(this.props)
     const posterImage = this.props.show.poster_path === null ? <></> : <div><PosterImage src={`https://image.tmdb.org/t/p/w500${this.props.show.poster_path}`}/></div>
     const genreInfo = this.props.show.genres.map((genre, index) => {
       return <li key={index} data-id={genre.id}>{genre.name}</li>
