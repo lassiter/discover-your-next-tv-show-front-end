@@ -2,7 +2,6 @@ import React from 'react'
 import Autosuggest from 'react-autosuggest';
 import PropTypes from 'prop-types';
 import Cable from 'actioncable';
-import Link from 'react-router-dom'
 
 export default class SearchBar extends React.Component {
   static propTypes = {

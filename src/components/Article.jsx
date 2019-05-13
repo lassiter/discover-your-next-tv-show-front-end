@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import Title from './Title'
 import styled from 'styled-components'
 import SeriesInfo from './SeriesInfo'
-import Trailer from './Trailer';
 
 const Wrapper = styled.article`
   max-width: 50%;

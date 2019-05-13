@@ -4,9 +4,8 @@ import App from './App';
 import Page from './Page'
 import NotFound from './404'
 import * as serviceWorker from './serviceWorker';
-import { API_WS_ROOT } from './constants';
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   body {

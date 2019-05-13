@@ -1,5 +1,4 @@
 import React from 'react';
-import SearchBar from './components/SearchBar';
 import Sidebar from './components/Sidebar'
 import Axios from 'axios';
 import styled from 'styled-components'
