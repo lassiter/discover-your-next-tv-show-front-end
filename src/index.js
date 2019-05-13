@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import Page from './Page'
+import NotFound from './404'
 import * as serviceWorker from './serviceWorker';
 import { API_WS_ROOT } from './constants';
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
@@ -87,7 +88,7 @@ const GlobalStyle = createGlobalStyle`
   .react-autosuggest__suggestion {
 
   } 
-  
+
   .react-autosuggest__suggestion--first {
 
   }
@@ -99,6 +100,7 @@ const routes = (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={App} />
+        <Route exact path="/404" component={NotFound} />
         <Route path="/:slug" component={Page} />
       </Switch>
     </BrowserRouter>

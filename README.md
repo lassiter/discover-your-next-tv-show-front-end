@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+redis-server /usr/local/etc/redis.conf
+
 ## Available Scripts
 
 In the project directory, you can run:

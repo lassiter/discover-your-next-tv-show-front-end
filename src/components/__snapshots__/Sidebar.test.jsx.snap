@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with data 1`] = `
+<aside
+  className="sc-htpNat kPvhN"
+>
+  <h4>
+    Network
+  </h4>
+  <ul
+    className="sc-bxivhb fhznyg"
+  >
+    <li>
+      <img
+        alt="HBO"
+        src="https://image.tmdb.org/t/p/h30/tuomPhY2UtuPTqqFnKMVHvSb724.png"
+      />
+    </li>
+  </ul>
+  <h4>
+    Production Companies
+  </h4>
+  <ul
+    className="sc-bxivhb fhznyg"
+  >
+    <li>
+      <img
+        alt="Revolution Sun Studios"
+        src="https://image.tmdb.org/t/p/h30/9RO2vbQ67otPrBLXCaC8UMp3Qat.png"
+      />
+    </li>
+    <li>
+      Television 360
+    </li>
+    <li>
+      Generator Entertainment
+    </li>
+    <li>
+      Bighead Littlehead
+    </li>
+  </ul>
+</aside>
+`;

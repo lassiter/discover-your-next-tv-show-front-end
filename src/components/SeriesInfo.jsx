@@ -54,13 +54,14 @@ class Season extends Component {
       overview = <></>
     }
     console.log(this.props)
+    const posterImage = this.props.season.poster_path === null ? <></> : <PosterImage src={`https://image.tmdb.org/t/p/w500${this.props.season.poster_path}`}/>
     return (
       <StyledPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <h4>{this.props.season.name}</h4>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <PosterImage src={`https://image.tmdb.org/t/p/w500${this.props.season.poster_path}`}/>
+          {posterImage}
           <InfoContainer>
             {overview}
             <Detail>Episodes This Season: {this.props.season.episode_count}</Detail>

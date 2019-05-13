@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with matching original name and name 1`] = `
+Array [
+  <span
+    className="sc-htpNat gPdQJU"
+  >
+    <h1
+      className="sc-bdVaJa hiOOZY"
+    >
+      攻殻機動隊
+    </h1>
+    <h3
+      className="sc-bxivhb dYyLZ"
+    >
+      (
+      2002
+      )
+    </h3>
+  </span>,
+  <h3
+    className="sc-bwzfXH iXQaeo"
+  >
+    Ghost in the Shell
+  </h3>,
+]
+`;
+
+exports[`renders correctly with unmatching original name and name 1`] = `
+Array [
+  <span
+    className="sc-htpNat gPdQJU"
+  >
+    <h1
+      className="sc-bdVaJa hiOOZY"
+    >
+      攻殻機動隊
+    </h1>
+    <h3
+      className="sc-bxivhb dYyLZ"
+    >
+      (
+      2002
+      )
+    </h3>
+  </span>,
+  <h3
+    className="sc-bwzfXH iXQaeo"
+  >
+    Ghost in the Shell
+  </h3>,
+]
+`;

@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Overview should render without throwing an error 1`] = `
+<styled.article>
+  <div>
+    <styled.img
+      src="https://image.tmdb.org/t/p/w500/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"
+    />
+  </div>
+  <div>
+    <Title
+      firstAirDate="2011-04-17"
+      name="Game of Thrones"
+      originalName="Game of Thrones"
+    />
+    <Rating
+      rating={8.2}
+      votes={5812}
+    />
+    <Trailer
+      showID={1399}
+    />
+    <styled.p>
+      Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.
+    </styled.p>
+    <styled.ul>
+      <li
+        data-id={10765}
+        key="0"
+      >
+        Sci-Fi & Fantasy
+      </li>
+      <li
+        data-id={18}
+        key="1"
+      >
+        Drama
+      </li>
+      <li
+        data-id={10759}
+        key="2"
+      >
+        Action & Adventure
+      </li>
+    </styled.ul>
+  </div>
+</styled.article>
+`;

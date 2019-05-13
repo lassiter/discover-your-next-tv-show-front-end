@@ -1,17 +1,41 @@
 import React from 'react';
-import SearchBar from './components/SearchBar';
 import Poster from './components/Poster';
 import Axios from 'axios';
 import InfiniteScroll from "react-infinite-scroll-component";
 import styled from 'styled-components'
-
+import { Link } from 'react-router-dom'
+import SearchBar from './components/SearchBar';
 
 const StyledInfScroll = styled(InfiniteScroll)`
   display: flex;
   flex-wrap: wrap;
 `
 
-export default class App extends React.Component {
+const ErrorWrapper = styled.div`
+  margin: 0 auto;
+  width: fit-content;
+`
+const Masthead = styled.div`
+  display: flex;
+
+`
+
+const BackToHome = styled.div`
+
+  height: fit-content;
+  width: fit-content;
+  background: black;
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin: 5px 0 0 5px;
+
+  & > a {
+    color: white;
+    text-decoration: none;
+  }
+`
+
+export default class NotFound extends React.Component {
   constructor(props){
     super(props)
 
@@ -83,6 +107,15 @@ export default class App extends React.Component {
     }
     return (
       <div className="App">
+        <Masthead>
+          <BackToHome>
+            <Link to={"/"}>← Home</Link>
+          </BackToHome>
+          <ErrorWrapper>
+            <h1>Uhoh... we couldn't find that page!</h1>
+            <h2>These are some of our favorites.</h2>
+          </ErrorWrapper>
+        </Masthead>
         <SearchBar/>
         <StyledInfScroll
           dataLength={this.state.popularTVShows.shows.length}

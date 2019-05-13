@@ -50,7 +50,13 @@ export default class Sidebar extends Component {
     });
 
     let productionCompaniesTitle;
-    this.props.show.production_companies.length > 1 ? productionCompaniesTitle = "Production Companies" : productionCompaniesTitle = "Production Company";
+    if (this.props.show.production_companies.length === 0) {
+      productionCompaniesTitle = <></>
+    } else if (this.props.show.production_companies.length > 1) {
+      productionCompaniesTitle = "Production Companies"
+    } else {
+      productionCompaniesTitle = "Production Company"
+    }
     let productionCompanies = this.props.show.production_companies.map((pc, index) => {
       if (pc.logo_path === null) {
         return (

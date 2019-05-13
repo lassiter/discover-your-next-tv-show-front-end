@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<a
+  alt="Game of Thrones"
+  className="sc-bdVaJa kZDaAF"
+  href="/Game-of-Thrones"
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
+  <img
+    className="sc-bwzfXH keFRXT"
+    src="https://image.tmdb.org/t/p/w500/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"
+  />
+  <div
+    className="hidden sc-ifAKCX yjWSy"
+  >
+    <h3
+      className="sc-htpNat lctXZJ"
+    >
+      Game of Thrones
+    </h3>
+    <p
+      className="sc-bxivhb fJKucG"
+    >
+      Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.
+    </p>
+  </div>
+</a>
+`;

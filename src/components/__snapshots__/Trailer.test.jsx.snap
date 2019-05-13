@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders correctly with id value 1`] = `
+<div>
+  <ModalVideo
+    allowFullScreen={true}
+    animationSpeed={300}
+    aria={
+      Object {
+        "dismissBtnMessage": "Close the modal by clicking here",
+        "openMessage": "You just openned the modal video",
+      }
+    }
+    channel="youtube"
+    classNames={
+      Object {
+        "modalVideo": "modal-video",
+        "modalVideoBody": "modal-video-body",
+        "modalVideoClose": "modal-video-close",
+        "modalVideoCloseBtn": "modal-video-close-btn",
+        "modalVideoEffect": "modal-video-effect",
+        "modalVideoIframeWrap": "modal-video-movie-wrap",
+        "modalVideoInner": "modal-video-inner",
+      }
+    }
+    isOpen={false}
+    onClose={[Function]}
+    ratio="16:9"
+    videoId="Dv0UBTfnqdI"
+    vimeo={
+      Object {
+        "api": false,
+        "autopause": true,
+        "autoplay": true,
+        "byline": true,
+        "callback": null,
+        "color": null,
+        "height": null,
+        "loop": false,
+        "maxheight": null,
+        "maxwidth": null,
+        "player_id": null,
+        "portrait": true,
+        "title": true,
+        "width": null,
+        "xhtml": false,
+      }
+    }
+    youku={
+      Object {
+        "autoplay": 1,
+        "show_related": 0,
+      }
+    }
+    youtube={
+      Object {
+        "autoplay": 1,
+        "cc_load_policy": 1,
+        "color": null,
+        "controls": 1,
+        "disablekb": 0,
+        "enablejsapi": 0,
+        "end": null,
+        "fs": 1,
+        "h1": null,
+        "iv_load_policy": 1,
+        "list": null,
+        "listType": null,
+        "loop": 0,
+        "modestbranding": null,
+        "origin": null,
+        "playlist": null,
+        "playsinline": null,
+        "rel": 0,
+        "showinfo": 1,
+        "start": 0,
+        "theme": "dark",
+        "wmode": "transparent",
+      }
+    }
+  />
+  <styled.button
+    onClick={[Function]}
+  >
+    ► View Trailer
+  </styled.button>
+</div>
+`;
+
+exports[`App renders correctly with id value 2`] = `<Fragment />`;
+
+exports[`renders correctly with id value 1`] = `null`;
+
+exports[`renders correctly with null value 1`] = `
+<div>
+  <button
+    className="sc-bdVaJa eZJXyw"
+    onClick={[Function]}
+  >
+    ► View Trailer
+  </button>
+</div>
+`;

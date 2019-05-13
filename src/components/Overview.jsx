@@ -45,15 +45,13 @@ const PosterImage = styled.img`
 export default class Overview extends Component {
   render() {
     console.log(this.props)
-
+    const posterImage = this.props.show.poster_path === null ? <></> : <div><PosterImage src={`https://image.tmdb.org/t/p/w500${this.props.show.poster_path}`}/></div>
     const genreInfo = this.props.show.genres.map((genre, index) => {
       return <li key={index} data-id={genre.id}>{genre.name}</li>
     })
     return (
       <Wrapper>
-        <div>
-          <PosterImage src={`https://image.tmdb.org/t/p/w500${this.props.show.poster_path}`}/>
-        </div>
+        {posterImage}
         <div>
           <Title name={this.props.show.name} originalName={this.props.show.original_name} firstAirDate={this.props.show.first_air_date}/>
           <Rating rating={this.props.show.vote_average} votes={this.props.show.vote_count}/><Trailer showID={this.props.show.id}/>

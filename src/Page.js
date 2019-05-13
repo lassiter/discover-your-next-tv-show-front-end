@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { API_ROOT } from './constants';
 import Article from './components/Article'
 import Overview from './components/Overview'
+import { Redirect } from 'react-router-dom'
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -49,6 +50,7 @@ export default class Page extends React.Component {
     super(props)
 
     this.state = {
+      status: null,
       show: null,
       loading: true
     }
@@ -56,12 +58,16 @@ export default class Page extends React.Component {
 
   componentDidMount(){
     const { slug } = this.props.match.params
-    console.log('mounted page', slug, this.props.location.state)
-      Axios.get(`${API_ROOT}/search?q=${slug}&by=slug&class=TvShow`).then(response => {
-        console.log(this.state)
-        this.setState({
-          show: response.data
-        })
+      Axios.get(`${API_ROOT}/search?q=${slug}&by=slug&class=TvShow`, { validateStatus: false }).then(response => {
+        if (response.status === 404) {
+          this.setState({
+            status: response.status
+          })
+        } else {
+          this.setState({
+            show: response.data
+          })
+        }
       }).then(()=>{
         console.log(this.state)
         this.setState({
@@ -72,6 +78,9 @@ export default class Page extends React.Component {
 
   render() {
     console.log(this.state)
+    if (this.state.status === 404) {
+      return <Redirect to='/404' />
+    }
     if (this.state.loading) {
       return null
     }

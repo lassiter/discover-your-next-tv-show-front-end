@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ModalVideo from 'react-modal-video'
 import Axios from 'axios';
 import styled from 'styled-components'
+import { isNotNullOrUndefined } from '../helpers/typeChecker'
 
 const Button = styled.button`
   border-color: black;
@@ -24,9 +25,11 @@ export default class Trailer extends Component {
 
   componentDidMount(){
     Axios.get(`https://api.themoviedb.org/3/tv/${this.props.showID}/videos?api_key=${process.env.REACT_APP_TMDB_API_KEY}`).then(response => {
-      this.setState({
-        youTubeKey: response.data.results[0].key
-      })
+      if (response.data.results.length >= 1) {
+        this.setState({
+          youTubeKey: response.data.results[0].key
+        })
+      }
       console.log(response.data)
     })
   }
@@ -35,7 +38,7 @@ export default class Trailer extends Component {
 
   render () {
     console.log(this.props, this.state)
-    if (this.props.showID === null) {
+    if (isNotNullOrUndefined(this.props.showID) || isNotNullOrUndefined(this.state.youTubeKey)) {
       return <></>
     } else {
       return (

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import styled from 'styled-components';
+import { isNotNullOrUndefined } from '../helpers/typeChecker'
 
 const StyledRating = styled.div`
 
@@ -31,17 +32,27 @@ export default class ContentRating extends Component {
     console.log(this.props)
     Axios.get(`https://api.themoviedb.org/3/${this.props.mediaType}/${this.props.id}/content_ratings?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`).then(response => {
       console.log(response.data)
-      let usaRating = response.data.results.filter(result => result.iso_3166_1 === "US")[0].rating
-      this.setState({
-        rating: usaRating
-      })
+      if (response.data.results.length >= 1) {
+        let usaRating = response.data.results.filter(result => result.iso_3166_1 === "US")[0].rating
+        this.setState({
+          rating: usaRating
+        })
+      } else {
+        this.setState({
+          rating: null
+        })
+      }
     })
   }
 
   render() {
-    if ((this.props.id || this.props.mediaType) === (null || undefined) ) {
+    console.log(this.state.rating, this.props)
+    console.log(isNotNullOrUndefined(this.state.rating))
+    console.log(isNotNullOrUndefined(this.props.id))
+    console.log(isNotNullOrUndefined(this.props.mediaType))
+    if (isNotNullOrUndefined(this.state.rating) || isNotNullOrUndefined(this.props.id) || isNotNullOrUndefined(this.props.mediaType)) {
       return <></>
-    } else {
+    }
       return (
         <>
           <h4>Content Rating</h4>
@@ -51,6 +62,5 @@ export default class ContentRating extends Component {
           </InternalWrapper>
         </>
       )
-    }
   }
 }
