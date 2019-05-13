@@ -46,7 +46,7 @@ export default class SearchBar extends React.Component {
     };
 
     this.createSocket = () => {
-      let cable = Cable.createConsumer('ws://localhost:3001/cable');
+      let cable = Cable.createConsumer(process.env.REACT_APP_API_WS_ROOT);
       this.searches = cable.subscriptions.create({
         channel: 'SearchChannel'
       }, {
