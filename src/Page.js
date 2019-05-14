@@ -2,7 +2,6 @@ import React from 'react';
 import Sidebar from './components/Sidebar'
 import Axios from 'axios';
 import styled from 'styled-components'
-import { API_ROOT } from './constants';
 import Article from './components/Article'
 import Overview from './components/Overview'
 import { Redirect } from 'react-router-dom'
@@ -57,7 +56,22 @@ export default class Page extends React.Component {
 
   componentDidMount(){
     const { slug } = this.props.match.params
-      Axios.get(`${API_ROOT}/search?q=${slug}&by=slug&class=TvShow`, { validateStatus: false }).then(response => {
+    console.log("mount", process.env.REACT_APP_TMDB_API_KEY)
+    console.log(slug)
+    Axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${slug}&page=1`)
+    .then(response => {
+      console.log(response)
+      if (response.status === 404) {
+        this.setState({
+          status: response.status
+        })
+      } else {
+        return response.data.results[0].id
+      }
+    })
+    .then(showID => {
+      console.log(showID)
+      Axios.get(`https://api.themoviedb.org/3/tv/${showID}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`).then(response => {
         if (response.status === 404) {
           this.setState({
             status: response.status
@@ -67,13 +81,14 @@ export default class Page extends React.Component {
             show: response.data
           })
         }
-      }).then(()=>{
+      })
+      .then(()=>{
         this.setState({
           loading: false
         })
       })
+    })
   }
-
   render() {
     if (this.state.status === 404) {
       return <Redirect to='/404' />
@@ -82,7 +97,7 @@ export default class Page extends React.Component {
       return null
     }
       return (
-        <Wrapper className={"loader"}>
+        <Wrapper>
           <Masthead backDrop={`https://image.tmdb.org/t/p/w1400_and_h450_face${this.state.show.backdrop_path}`}>
             <InternalMasthead>
               <Overview show={this.state.show}/>

@@ -95,7 +95,7 @@ export default class Poster extends Component {
           onMouseEnter={this.handleHover}
           onMouseLeave={this.handleHover}
           to={{
-            pathname: `/${this.props.showData.name.split(" ").join('_')}`,
+            pathname: `/${this.props.showData.name.split(" ").join('-')}`,
             state: {
               show: this.props.showData
             }
@@ -114,7 +114,7 @@ export default class Poster extends Component {
           onMouseEnter={this.handleHover}
           onMouseLeave={this.handleHover}
           to={{
-            pathname: `/${this.props.showData.name.split(" ").join('_')}`,
+            pathname: `/${this.props.showData.name.split(" ").join('-')}`,
             state: {
               show: this.props.showData
             }
