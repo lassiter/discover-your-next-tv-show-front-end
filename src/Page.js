@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import Article from './components/Article'
 import Overview from './components/Overview'
 import { Redirect } from 'react-router-dom'
+import { reject } from 'q';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -56,21 +57,18 @@ export default class Page extends React.Component {
 
   componentDidMount(){
     const { slug } = this.props.match.params
-    console.log("mount", process.env.REACT_APP_TMDB_API_KEY)
-    console.log(slug)
     Axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${slug}&page=1`)
     .then(response => {
-      console.log(response)
-      if (response.status === 404) {
+      if (response.status === 404 || response.data.results.length === 0) {
         this.setState({
-          status: response.status
+          status: 404
         })
+        reject()
       } else {
         return response.data.results[0].id
       }
     })
     .then(showID => {
-      console.log(showID)
       Axios.get(`https://api.themoviedb.org/3/tv/${showID}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`).then(response => {
         if (response.status === 404) {
           this.setState({
