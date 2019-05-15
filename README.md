@@ -11,13 +11,13 @@ For instructions on how to install Redis on your OS/machine, you can view the do
 2. Start Postgres, view docs here: https://www.postgresql.org/docs/9.1/server-start.html
 3. Start Redis, via terminal `redis-server /usr/local/etc/redis.conf`
 4. Install the Backend
-   1. `git clone ...`
+   1. `git clone https://github.com/lassiter/discover-your-next-tv-show-front-end.git`
    2. CD into the directory where you cloned the repo.
    3. Change `../config/local_env.example.yml` to `../config/local_env.yml` and insert your TMDB API key to replace "foobar".
    4. Install the dependencies by running `bundle install`
    5. Start the server `rails s`
 5. Install the Front-end
-   1. `git clone ...`
+   1. `git clone https://github.com/lassiter/discover-your-next-tv-show.git`
    2. CD into the directory where you cloned the repo.
    3. In the root directory, create a file called `.env.local` and insert `REACT_APP_TMDB_API_KEY=yourapikeyhere` and replace "yourapikeyhere" with your TMDB API key.
    4. Install the dependencies by running `npm install`
@@ -42,6 +42,6 @@ There is also a rake task which downloads the [daily exported TV Show records](h
 
 Styling is done via StyledComponents.
 
-I think if I were to do this again, I would stick with the react front-end I have and micro-service but use a framework lighter than rails. If cost wasn't an issue, I'd offload the instant search to Algolia. However, with 80,000 records in Postgres and 750,000 keys in the Redis cache at 900mb. I'd also figure out a better way to handle the parsing when people visit a URL. One issue that I ran out of time with was figuring out the best way to handle multi-lingual url paths since the display language is always in english the the records are sorted by original name. So for example, if you visit "/One-Punch_Man" you'll get a 404 because the slug would need to be the original title of "ワンパンマン". That's tricky when you're working off an export record which looks like this: `#<TvShow id: 63926, title: "ワンパンマン", popularity: 0.337561e3, created_at: "2019-05-12 05:09:46", updated_at: "2019-05-12 05:09:46">`
+I think if I were to do this again, I would stick with the react front-end I have and micro-service but use a framework lighter than rails. If cost wasn't an issue, I'd offload the instant search to Algolia. However, with 80,000 records in Postgres and 750,000 keys in the Redis cache at 900mb. I'd also figure out a better way to handle the parsing when people visit a URL. One issue that I ran out of time with was figuring out the best way to handle multi-lingual url paths for instant search since the display language is always in english the the records are sorted by original name. I think if I had more time, I'd add a columns for the original name and english name and build a job that could pull the correct api for each.
 
 Overall, I think my approach was solid. There are points that were good and many that can improve in quick project like this.
